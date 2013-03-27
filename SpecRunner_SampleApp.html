@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="stylesheet" type="text/css" href="lib/jasmine/jasmine.css"/>
+    <script type="text/javascript" src="lib/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="lib/jasmine/jasmine-html.js"></script>
+    <script type="text/javascript" src="lib/jasmine/jasmine-jquery.js"></script>
+    <script type="text/javascript" src="lib/require.js"></script>
+    <script type="text/javascript" src="lib/handlebars-1.0.rc.1.js"></script>
+    
+    <script type="text/javascript" src="TypeScriptTinyIoC/TypeScriptTinyIoC.js"></script>
+    <script type="text/javascript" src="TypeScriptTinyIoC/ConfigSettingsService.js"></script>
+
+    <script type="text/javascript" src="SampleApp/models/ListItem.js"></script>
+    <script type="text/javascript" src="SampleApp/models/ListItemCollection.js"></script>
+
+    <script type="text/javascript" src="SampleApp/services/IListItemService.js"></script>
+    <script type="text/javascript" src="SampleApp/services/MockListItemService.js"></script>
+
+    <script type="text/javascript" src="SampleApp/events/ListItemEvents.js"></script>
+
+    <script type="text/javascript" src="SampleApp/tests/models/ListItem_Tests.js"></script>
+    <script type="text/javascript" src="SampleApp/tests/services/ListItemService_Tests.js"></script>
+    <script type="text/javascript" src="SampleApp/tests/views/ListItemView_Tests.js"></script>
+    <script type="text/javascript" src="SampleApp/tests/views/ListItemCollectionView_Tests.js"></script>
+    <script type="text/javascript" src="SampleApp/tests/SampleApp_Tests.js"></script>
+
+    <script type="text/javascript" src="SampleApp/views/ListItemView.js"></script>
+    <script type="text/javascript" src="SampleApp/views/ListItemCollectionView.js"></script>
+    <script type="text/javascript" src="SampleApp/SampleApp.js"></script>
+
+
+<script type="text/javascript" >
+    if (location.hash === '#testem') {
+        document.write('<script src="/testem.js"></' + 'script>')
+    }
+
+    $(function () {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.updateInterval = 1000;
+
+        var htmlReporter = new jasmine.HtmlReporter();
+
+        jasmineEnv.addReporter(htmlReporter);
+
+        jasmineEnv.specFilter = function (spec) {
+            return htmlReporter.specFilter(spec);
+        };
+
+        jasmine.getEnv().execute();
+    });
+</script>    
+
+</head>
+
+<body>
+
+
+</body>
+</html>
+
