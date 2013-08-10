@@ -1,36 +1,31 @@
 var IITodoEventClicked = (function () {
     function IITodoEventClicked() {
         this.className = 'IITodoEventClicked';
-        this.propertyNames = [
-            'TodoId'
-        ];
+        this.propertyNames = ['TodoId'];
     }
     return IITodoEventClicked;
 })();
+
 var IITodoEventHandler = (function () {
     function IITodoEventHandler() {
         this.className = 'IITodoEventHandler';
-        this.methodNames = [
-            'handleEvent'
-        ];
+        this.methodNames = ['handleEvent'];
     }
     return IITodoEventHandler;
 })();
+
 var IISecondEventClicked = (function () {
     function IISecondEventClicked() {
         this.className = 'IISecondEvent';
-        this.propertyNames = [
-            'SecondId'
-        ];
+        this.propertyNames = ['SecondId'];
     }
     return IISecondEventClicked;
 })();
+
 var IISecondEventHandler = (function () {
     function IISecondEventHandler() {
         this.className = 'IISecondEventHandler';
-        this.methodNames = [
-            'handleSecond'
-        ];
+        this.methodNames = ['handleSecond'];
     }
     return IISecondEventHandler;
 })();

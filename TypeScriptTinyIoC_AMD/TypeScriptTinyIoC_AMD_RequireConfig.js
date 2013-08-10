@@ -13,60 +13,57 @@ require.config({
     },
     shim: {
         jqueryui: {
-            deps: [
-                "jquery"
-            ],
+            deps: ["jquery"],
             exports: "$"
         },
         underscore: {
             exports: '_'
         },
         backbone: {
-            deps: [
-                "underscore", 
-                "jquery"
-            ],
+            deps: ["underscore", "jquery"],
             exports: "Backbone"
         },
         handlebars: {
-            deps: [
-                "underscore"
-            ],
+            deps: ["underscore"],
             exports: "Handlebars"
         },
         console: {
             exports: "console"
         },
         tinyioc: {
-            deps: [
-                "jquery"
-            ]
+            deps: ["jquery"]
         }
     }
 });
+
 require([
-    'jquery', 
-    'backbone', 
-    'tinyioc', 
-    'console', 
-    'configsettingsservice', 
-    'Test_TypeScriptTinyIoC', 
-    'Test_TypeScriptTinyIoC_ClassDefinitions', 
-    'Test_TypeScriptTinyIoC_Events', 
+    'jquery',
+    'backbone',
+    'tinyioc',
+    'console',
+    'configsettingsservice',
+    'Test_TypeScriptTinyIoC',
+    'Test_TypeScriptTinyIoC_ClassDefinitions',
+    'Test_TypeScriptTinyIoC_Events',
     'Test_ConfigSettingsService'
 ], function ($, Backbone, tinyioc, console, configsettingsservice) {
     $(function () {
         $.ajaxSetup({
-            cache: // Disable caching of AJAX responses
-            false
+            // Disable caching of AJAX responses
+            cache: false
         });
+
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.updateInterval = 1000;
-        var htmlReporter = new jasmine.HtmlReporter();
+
+        var htmlReporter = new jasmine.TrivialReporter();
+
         jasmineEnv.addReporter(htmlReporter);
+
         jasmineEnv.specFilter = function (spec) {
             return htmlReporter.specFilter(spec);
         };
+
         jasmine.getEnv().execute();
     });
 });

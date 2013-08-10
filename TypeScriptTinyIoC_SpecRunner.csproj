@@ -33,6 +33,7 @@
     <TypeScriptCompile Include="modules\require.d.ts" />
     <TypeScriptCompile Include="modules\jquery.d.ts" />
     <TypeScriptCompile Include="modules\Handlebars.d.ts" />
+    <Content Include="modules\underscore.d.ts" />
     <Content Include="SampleApp.html" />
     <Content Include="SpecRunner_AMD.html" />
     <Content Include="SpecRunner_Common.html" />

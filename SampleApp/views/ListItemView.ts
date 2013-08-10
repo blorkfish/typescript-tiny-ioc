@@ -1,10 +1,12 @@
 /// <reference path="../../modules/Backbone.d.ts" />
 /// <reference path="../../modules/Handlebars.d.ts" />
 /// <reference path="../../TypeScriptTinyIoC/ConfigSettingsService.ts" />
+/// <reference path="../events/ListItemEvents.ts" />
+
 
 class ListItemView extends Backbone.View {
 
-    constructor(options? : any) {
+    constructor(options?: any) {
         this.model = options.model;
         this.events = {
             'click' : 'onClicked'
@@ -12,7 +14,7 @@ class ListItemView extends Backbone.View {
         super(options);
     }
 
-    render(): any {
+    render(): Backbone.View {
         
         var configService : ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
         var snippet = configService.readSetting('ListItemView_Snippet');

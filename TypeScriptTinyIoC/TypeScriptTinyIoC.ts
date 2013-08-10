@@ -44,7 +44,7 @@ class InterfaceChecker {
             }
         };
 
-    };
+    }
 
     static implementsInterface(object: any, targetInterface: InterfaceChecker) {
         var i, len: number;
@@ -58,7 +58,7 @@ class InterfaceChecker {
             }
         }
         return true;
-    };
+    }
 
 }
 

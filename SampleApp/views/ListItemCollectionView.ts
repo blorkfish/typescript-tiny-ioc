@@ -3,6 +3,7 @@
 /// <reference path="../../TypeScriptTinyIoC/ConfigSettingsService.ts" />
 /// <reference path="../../SampleApp/models/ListItem.ts" />
 /// <reference path="../../SampleApp/views/ListItemView.ts" />
+/// <reference path="../../modules/underscore.d.ts" />
 
 class ListItemCollectionView extends Backbone.View {
     constructor(options?: any) {
@@ -12,7 +13,7 @@ class ListItemCollectionView extends Backbone.View {
         _.bindAll(this, 'addListItem');
     }
 
-    render(): any {
+    render(): Backbone.View {
 
         var configService: ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
         var snippet = configService.readSetting('ListItemCollectionView_Snippet');

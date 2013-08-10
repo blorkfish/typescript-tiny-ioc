@@ -1,5 +1,5 @@
 // Interface
 
-declare module setFixtures {
-    export function( fixture: string) : any;
-}
+//declare module setFixtures {
+//    export function( fixture: string) : any;
+//}

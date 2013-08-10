@@ -12,8 +12,11 @@
 describe('SampleApp_Tests', function () {
     it('should handle handle_ListItemCollection_LoadedEvent', function () {
         var sampleApp = new SampleApp();
+
         var handleLoadedEventSpy = spyOn(sampleApp, 'handle_ListItemCollection_LoadedEvent');
+
         sampleApp.run();
+
         expect(handleLoadedEventSpy).toHaveBeenCalled();
     });
 });

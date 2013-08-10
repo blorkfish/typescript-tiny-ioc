@@ -7,7 +7,8 @@
 declare function describe(description: string, specDefinitions: Function): void;
 declare function xdescribe(description: string, specDefinitions: Function): void;
 
-declare function it(expectation: string, assertion: Function): void;
+declare function it(expectation: string, assertion: () => void ): void;
+declare function it(expectation: string, assertion: (done: (err?) => void ) => void ): void;
 declare function xit(expectation: string, assertion: Function): void;
 
 declare function beforeEach(action: Function): void;
@@ -20,20 +21,18 @@ declare function expect(actual: any): jasmine.Matchers;
 declare function spyOn(object: any, method: string): jasmine.Spy;
 
 declare function runs(asyncMethod: Function): void;
-declare function waitsFor(latchMethod: () => bool, failureMessage: string, timeout?: number): void;
+declare function waitsFor(latchMethod: () => boolean, failureMessage: string, timeout?: number): void;
 declare function waits(timeout?: number): void;
-
 
 declare module jasmine {
 
     var Clock: Clock;
 
     function any(aclass: any);
-    function createSpy(name: string): any;
+    function createSpy(name: string): Spy;
     function createSpyObj(baseName: string, methodNames: any[]): any;
-
+    function pp(value: any): string;
     function getEnv(): Env;
-    function getHtmlReporter(): HtmlReporter;
 
     interface Any {
 
@@ -60,9 +59,9 @@ declare module jasmine {
         uninstallMock(): void;
         real;
         assertInstalled(): void;
-        isInstalled(): bool;
+        isInstalled(): boolean;
         installed: any;
-    };
+    }
 
     interface Env {
         setTimeout;
@@ -87,7 +86,7 @@ declare module jasmine {
         equals_(a, b, mismatchKeys, mismatchValues);
         contains_(haystack, needle);
         addEqualityTester(equalityTester);
-        specFilter(spec): bool;
+        specFilter(spec): boolean;
     }
 
     interface FakeTimer {
@@ -100,9 +99,8 @@ declare module jasmine {
         scheduleFunction(timeoutKey, funcToCall, millis, recurring): void;
     }
 
-    export class HtmlReporter {
+    interface HtmlReporter {
         new ();
-        specFilter(spec : any);
     }
 
     interface NestedResults {
@@ -145,33 +143,38 @@ declare module jasmine {
 
     interface Matchers {
 
-        new (env: Env, actual, spec: Env, isNot?: bool);
+        new (env: Env, actual, spec: Env, isNot?: boolean);
 
-        toBe(expected): bool;
-        toNotBe(expected): bool;
-        toEqual(expected): bool;
-        toNotEqual(expected): bool;
-        toMatch(expected): bool;
-        toNotMatch(expected): bool;
-        toBeDefined(): bool;
-        toBeUndefined(): bool;
-        toBeNull(): bool;
-        toBeNaN(): bool;
-        toBeTruthy(): bool;
-        toBeFalsy(): bool;
-        toHaveBeenCalled(): bool;
-        wasNotCalled(): bool;
-        toHaveBeenCalledWith(...params: any[]): bool;
-        toContain(expected): bool;
-        toNotContain(expected): bool;
-        toBeLessThan(expected): bool;
-        toBeGreaterThan(expected): bool;
-        toBeCloseTo(expected, precision): bool;
-        toThrow(expected? ): bool;
+        env: Env;
+        actual: any;
+        spec: Env;
+        isNot?: boolean;
+        message(): any;
+
+        toBe(expected): boolean;
+        toNotBe(expected): boolean;
+        toEqual(expected): boolean;
+        toNotEqual(expected): boolean;
+        toMatch(expected): boolean;
+        toNotMatch(expected): boolean;
+        toBeDefined(): boolean;
+        toBeUndefined(): boolean;
+        toBeNull(): boolean;
+        toBeNaN(): boolean;
+        toBeTruthy(): boolean;
+        toBeFalsy(): boolean;
+        toHaveBeenCalled(): boolean;
+        wasNotCalled(): boolean;
+        toHaveBeenCalledWith(...params: any[]): boolean;
+        toContain(expected): boolean;
+        toNotContain(expected): boolean;
+        toBeLessThan(expected): boolean;
+        toBeGreaterThan(expected): boolean;
+        toBeCloseTo(expected, precision): boolean;
+        toContainHtml(expected: string): boolean;
+        toContainText(expected: string): boolean;
+        toThrow(expected?): boolean;
         not: Matchers;
-        toBeEmpty(): bool;
-
-        toHaveText(text: string): bool;
 
         Any: Any;
     }
@@ -235,16 +238,18 @@ declare module jasmine {
     }
 
     interface Spy {
+        (...params: any[]): any;
+
         identity: string;
         calls: any[];
         mostRecentCall: { args: any[]; };
         argsForCall: any[];
-        wasCalled: bool;
+        wasCalled: boolean;
         callCount: number;
 
-        andReturn(value): void;
-        andCallThrough(): void;
-        andCallFake(fakeFunc: Function): void;
+        andReturn(value): Spy;
+        andCallThrough(): Spy;
+        andCallFake(fakeFunc: Function): Spy;
     }
 
     interface Suite {
@@ -296,4 +301,7 @@ declare module jasmine {
         Clock: Clock;
         util: Util;
     }
+
+    export var HtmlReporter: any;
+    export var TrivialReporter: any;
 }

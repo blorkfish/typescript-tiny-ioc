@@ -16,11 +16,11 @@ class ConfigSettingsService implements IConfigSettingsService {
     arrSettings: any[] = [];
     storeSetting(settingName: string, settingValue: any) {
         this.arrSettings[settingName] = settingValue;
-    };
+    }
     readSetting(settingName: string): any {
         if (!this.arrSettings[settingName]) {
             throw new Error("ConfigSettingsService readSetting with name " + settingName + " was not found");
         }
         return this.arrSettings[settingName];
-    };
+    }
 }

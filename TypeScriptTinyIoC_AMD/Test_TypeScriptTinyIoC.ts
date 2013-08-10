@@ -30,36 +30,36 @@ class IUnknownInterface implements IInterfaceChecker {
  
 class TestImplementsIDrawable implements IDrawable {
     centerOnPoint() {
-    };
+    }
     zoom() {
-    };
+    }
     draw() : string {
         return 'drawn';
-    };
+    }
 }
 
 
 class TestDoesNotImplementIDrawable {
     centerOnPoint() {
-    };
+    }
     zoom() {
-    };
+    }
 }
 
 class TestImplementsIDynamicMap {
     centerOnPoint() {
-    };
+    }
     zoom() {
-    };
+    }
     draw() {
-    };
+    }
 }
 
 class TestDoesNotImplementIDynamicMap {
     centerOnPoint() {
-    };
+    }
     zoom() {
-    };
+    }
 }
 
 interface Drivable {

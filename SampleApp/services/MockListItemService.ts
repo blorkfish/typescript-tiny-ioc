@@ -21,5 +21,5 @@ class MockListItemService implements IListItemService {
         var event: ListItemCollection_LoadedEvent = new ListItemCollection_LoadedEvent(listItemCollection);
         TypeScriptTinyIOC.raiseEvent(event, new IIListItemCollection_LoadedEvent());
 
-    };
+    }
 }

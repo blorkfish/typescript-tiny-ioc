@@ -1,4 +1,5 @@
 var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
@@ -6,6 +7,7 @@ var __extends = this.__extends || function (d, b) {
 /// <reference path="../../modules/Backbone.d.ts" />
 /// <reference path="../../modules/Handlebars.d.ts" />
 /// <reference path="../../TypeScriptTinyIoC/ConfigSettingsService.ts" />
+/// <reference path="../events/ListItemEvents.ts" />
 var ListItemView = (function (_super) {
     __extends(ListItemView, _super);
     function ListItemView(options) {
@@ -18,11 +20,14 @@ var ListItemView = (function (_super) {
     ListItemView.prototype.render = function () {
         var configService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
         var snippet = configService.readSetting('ListItemView_Snippet');
+
         var template = Handlebars.compile(snippet);
         var html = template(this.model.toJSON());
         $(this.el).html(html);
+
         return this;
     };
+
     ListItemView.prototype.onClicked = function () {
         var listItemEvent = new ListItem_Clicked(this.model);
         TypeScriptTinyIOC.raiseEvent(listItemEvent, new IIListItem_Clicked());

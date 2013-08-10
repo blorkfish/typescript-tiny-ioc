@@ -45,12 +45,12 @@ class MultipleEventHandler implements ITodoEventHandler, ISecondEventHandler {
     handleEvent(event: ITodoEventClicked) {
         this.wasClicked_ITodo = true;
         this.value_ITodo = event.TodoId;
-    };
+    }
 
     handleSecond(event: ISecondEventClicked) {
             this.wasClicked_ISecond = true;
             this.value_ISecond = event.SecondId;
-    };
+    }
 }
 
 
@@ -58,8 +58,11 @@ class MultipleEventHandler implements ITodoEventHandler, ISecondEventHandler {
 
 
 describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
+
+    var typeScriptTinyIoC = new TypeScriptTinyIOC();
+
         beforeEach(() => {
-            this.typeScriptTinyIoC = new TypeScriptTinyIOC();
+            //this.typeScriptTinyIoC = new TypeScriptTinyIOC();
         });
         it("test register and raise works correctly ", () => {
 
