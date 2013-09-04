@@ -1,12 +1,12 @@
+/// <reference path="../modules/Jasmine.d.ts" />
+/// <reference path="../modules/Jasmine-jquery.d.ts" />
+/// <reference path="../modules/require.d.ts" />
+/// <reference path="../modules/Backbone.d.ts" />
+/// <reference path="../modules/jquery.d.ts" />
+/// <reference path="../modules/Handlebars.d.ts" />
+/// <reference path="../TypeScriptTinyIoC/TypeScriptTinyIoC.ts" />
+/// <reference path="Test_TypeScriptTinyIoC_ClassDefinitions.ts" />
 define(["require", "exports", './Test_TypeScriptTinyIoC_AMD_Classes'], function(require, exports, __amdClasses__) {
-    /// <reference path="../modules/Jasmine.d.ts" />
-    /// <reference path="../modules/Jasmine-jquery.d.ts" />
-    /// <reference path="../modules/require.d.ts" />
-    /// <reference path="../modules/Backbone.d.ts" />
-    /// <reference path="../modules/jquery.d.ts" />
-    /// <reference path="../modules/Handlebars.d.ts" />
-    /// <reference path="../TypeScriptTinyIoC/TypeScriptTinyIoC.ts" />
-    /// <reference path="Test_TypeScriptTinyIoC_ClassDefinitions.ts" />
     var amdClasses = __amdClasses__;
 
     var TodoEventClicked = (function () {
@@ -55,9 +55,9 @@ define(["require", "exports", './Test_TypeScriptTinyIoC_AMD_Classes'], function(
     })();
 
     describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", function () {
-        var typeScriptTinyIoC = new TypeScriptTinyIOC();
-
+        //var typeScriptTinyIoC = new TypeScriptTinyIOC();
         beforeEach(function () {
+            //this.typeScriptTinyIoC = new TypeScriptTinyIOC();
         });
         it("test register and raise works correctly ", function () {
             var event = new TodoEventClicked("test");

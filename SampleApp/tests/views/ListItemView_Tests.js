@@ -40,6 +40,9 @@ describe('ListItemView_Tests', function () {
         }
 
         configSettingService.storeSetting('ListItemView_Snippet', htmlSnippet);
+        // setup mock handler
+        //mockHandler = new MockListItemEventHandler_Views();
+        //TypeScriptTinyIOC.registerHandler(mockHandler, new IIListItemCollection_LoadedEvent_Handler(), new IIListItemCollection_LoadedEvent());
     });
 
     afterEach(function () {

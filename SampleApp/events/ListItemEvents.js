@@ -1,3 +1,5 @@
+/// <reference path="../../TypeScriptTinyIoC/TypeScriptTinyIoC.ts" />
+/// <reference path="../models/ListItemCollection.ts" />
 var ListItemCollection_LoadedEvent = (function () {
     function ListItemCollection_LoadedEvent(input) {
         this.ListItemCollection = input;

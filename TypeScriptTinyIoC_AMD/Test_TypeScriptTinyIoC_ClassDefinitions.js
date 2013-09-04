@@ -1,3 +1,4 @@
+/// <reference path="../TypeScriptTinyIoC/TypeScriptTinyIoC.ts" />
 var IITodoEventClicked = (function () {
     function IITodoEventClicked() {
         this.className = 'IITodoEventClicked';

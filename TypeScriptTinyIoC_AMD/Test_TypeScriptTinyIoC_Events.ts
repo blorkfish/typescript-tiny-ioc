@@ -8,7 +8,7 @@
 /// <reference path="Test_TypeScriptTinyIoC_ClassDefinitions.ts" />
 
 
-import amdClasses = module('./Test_TypeScriptTinyIoC_AMD_Classes');
+import amdClasses = require('./Test_TypeScriptTinyIoC_AMD_Classes');
 
 class TodoEventClicked implements ITodoEventClicked {
     constructor (todoId: string) {
@@ -18,7 +18,7 @@ class TodoEventClicked implements ITodoEventClicked {
 }
 
 class TodoEventHandler implements ITodoEventHandler {
-    public wasClicked: bool;
+    public wasClicked: boolean;
     public value: string;
     handleEvent(event: ITodoEventClicked) {
         this.wasClicked = true;
@@ -37,9 +37,9 @@ class SecondEventClicked implements ISecondEventClicked {
 }
 
 class MultipleEventHandler implements ITodoEventHandler, ISecondEventHandler {
-    public wasClicked_ITodo: bool;
+    public wasClicked_ITodo: boolean;
     public value_ITodo: string;
-    public wasClicked_ISecond: bool;
+    public wasClicked_ISecond: boolean;
     public value_ISecond: string;
 
     handleEvent(event: ITodoEventClicked) {
@@ -59,7 +59,7 @@ class MultipleEventHandler implements ITodoEventHandler, ISecondEventHandler {
 
 describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
 
-    var typeScriptTinyIoC = new TypeScriptTinyIOC();
+    //var typeScriptTinyIoC = new TypeScriptTinyIOC();
 
         beforeEach(() => {
             //this.typeScriptTinyIoC = new TypeScriptTinyIOC();

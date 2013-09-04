@@ -1,3 +1,4 @@
+/// <reference path="../../TypeScriptTinyIoC/TypeScriptTinyIoC.ts" />
 var IIMockListItemService = (function () {
     function IIMockListItemService() {
         this.className = "IIMockListItemService";

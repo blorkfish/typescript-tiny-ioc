@@ -1,15 +1,15 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 /// <reference path="../../modules/Backbone.d.ts" />
 /// <reference path="../../modules/Handlebars.d.ts" />
 /// <reference path="../../TypeScriptTinyIoC/ConfigSettingsService.ts" />
 /// <reference path="../../SampleApp/models/ListItem.ts" />
 /// <reference path="../../SampleApp/views/ListItemView.ts" />
 /// <reference path="../../modules/underscore.d.ts" />
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
 var ListItemCollectionView = (function (_super) {
     __extends(ListItemCollectionView, _super);
     function ListItemCollectionView(options) {

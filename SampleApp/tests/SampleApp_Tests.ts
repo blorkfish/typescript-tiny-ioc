@@ -19,6 +19,7 @@ describe('SampleApp_Tests', () => {
         sampleApp.run();
 
         expect(handleLoadedEventSpy).toHaveBeenCalled();
+        
 
     });
 });

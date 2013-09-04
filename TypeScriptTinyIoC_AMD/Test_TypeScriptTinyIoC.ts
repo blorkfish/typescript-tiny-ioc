@@ -66,7 +66,7 @@ interface Drivable {
     // Start the car's ignition so that it can drive.
     start(): void;
     // Attempt to drive a distance. Returns true or false based on whether or not the drive was successful.
-    drive(distance: number): bool;
+    drive(distance: number): boolean;
     // Give the distance from the start.
     getPosition(): number;
 }
@@ -80,12 +80,12 @@ class IDriveable implements IInterfaceChecker {
 
 class Car implements Drivable {
     myName: string;
-    private _isRunning: bool;
+    private _isRunning: boolean;
     private _distanceFromStart: number;
     public start() {
         this._isRunning = true;
     }
-    public drive(distance: number): bool {
+    public drive(distance: number): boolean {
         if (this._isRunning) {
             this._distanceFromStart += distance;
             return true;

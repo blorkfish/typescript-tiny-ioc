@@ -1,5 +1,5 @@
+/// <reference path="Test_TypeScriptTinyIoC_ClassDefinitions.ts" />
 define(["require", "exports"], function(require, exports) {
-    /// <reference path="Test_TypeScriptTinyIoC_ClassDefinitions.ts" />
     var Test_TypeScriptTinyIoC_AMD_TodoEventHandler = (function () {
         function Test_TypeScriptTinyIoC_AMD_TodoEventHandler() {
         }

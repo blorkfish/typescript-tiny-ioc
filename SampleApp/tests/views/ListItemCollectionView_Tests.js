@@ -34,6 +34,9 @@ describe('ListItemCollectionView_Tests', function () {
         }
 
         configSettingService.storeSetting('ListItemCollectionView_Snippet', htmlSnippet);
+        //// setup mock handler
+        //mockHandler = new MockListItemEventHandler_CollectionViews();
+        //TypeScriptTinyIOC.registerHandler(mockHandler, new IIListItemCollection_LoadedEvent_Handler(), new IIListItemCollection_LoadedEvent());
     });
 
     afterEach(function () {

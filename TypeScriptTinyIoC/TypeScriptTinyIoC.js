@@ -43,6 +43,8 @@ var InterfaceChecker = (function () {
             var method = targetInterface.methods[i];
             if (!object[method] || typeof object[method] !== 'function') {
                 return false;
+                //throw new Error("Function InterfaceChecker.ensureImplements: object does not implement the " + targetInterface.name +
+                //    " interface. Method " + method + " was not found");
             }
         }
         return true;
@@ -67,6 +69,10 @@ var EventHandlerList = (function () {
 
             //try {
             handler[this.handleEventMethod](event);
+            //} catch (ex) {
+            //    // an error occurred raising an event.
+            //    // NOTE : console.log does NOT work here.
+            //}
         }
     };
 

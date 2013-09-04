@@ -1,7 +1,7 @@
 /// <reference path="Test_TypeScriptTinyIoC_ClassDefinitions.ts" />
 
 export class Test_TypeScriptTinyIoC_AMD_TodoEventHandler implements ITodoEventHandler {
-    public wasClicked: bool;
+    public wasClicked: boolean;
     public value: string;
     handleEvent(event: ITodoEventClicked) {
         this.wasClicked = true;

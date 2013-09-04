@@ -1,3 +1,10 @@
+/// <reference path="../modules/Jasmine.d.ts" />
+/// <reference path="../modules/Jasmine-jquery.d.ts" />
+/// <reference path="../modules/require.d.ts" />
+/// <reference path="../modules/Backbone.d.ts" />
+/// <reference path="../modules/jquery.d.ts" />
+/// <reference path="../modules/Handlebars.d.ts" />
+/// <reference path="../TypeScriptTinyIoC/TypeScriptTinyIoC.ts" />
 var _this = this;
 var IDrawableInterface = (function () {
     function IDrawableInterface() {
