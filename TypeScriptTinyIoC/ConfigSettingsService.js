@@ -7,7 +7,6 @@ var IIConfigSettingsService = (function () {
     }
     return IIConfigSettingsService;
 })();
-
 var ConfigSettingsService = (function () {
     function ConfigSettingsService() {
         this.arrSettings = [];

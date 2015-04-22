@@ -20,14 +20,11 @@ var ListItemView = (function (_super) {
     ListItemView.prototype.render = function () {
         var configService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
         var snippet = configService.readSetting('ListItemView_Snippet');
-
         var template = Handlebars.compile(snippet);
         var html = template(this.model.toJSON());
         $(this.el).html(html);
-
         return this;
     };
-
     ListItemView.prototype.onClicked = function () {
         var listItemEvent = new ListItem_Clicked(this.model);
         TypeScriptTinyIOC.raiseEvent(listItemEvent, new IIListItem_Clicked());

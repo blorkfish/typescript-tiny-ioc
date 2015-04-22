@@ -3,7 +3,8 @@
 /// <reference path="../../TypeScriptTinyIoC/ConfigSettingsService.ts" />
 /// <reference path="../../SampleApp/models/ListItem.ts" />
 /// <reference path="../../SampleApp/views/ListItemView.ts" />
-/// <reference path="../../modules/underscore.d.ts" />
+/// <reference path="../../scripts/typings/jquery/jquery.d.ts" />
+/// <reference path="../../scripts/typings/underscore/underscore.d.ts" />
 
 class ListItemCollectionView extends Backbone.View {
     constructor(options?: any) {

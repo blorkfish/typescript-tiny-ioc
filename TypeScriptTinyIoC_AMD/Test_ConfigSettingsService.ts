@@ -1,6 +1,6 @@
 /// <reference path="../modules/Jasmine.d.ts" />
 /// <reference path="../modules/Jasmine-jquery.d.ts" />
-/// <reference path="../modules/jquery.d.ts" />
+/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="../TypeScriptTinyIoC/TypeScriptTinyIoC.ts" />
 /// <reference path="../TypeScriptTinyIoC/ConfigSettingsService.ts" />
 

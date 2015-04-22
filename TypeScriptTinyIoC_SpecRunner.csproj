@@ -23,20 +23,24 @@
     <Content Include="lib\jasmine\jasmine-jquery.js" />
     <Content Include="lib\jasmine\jasmine.css" />
     <Content Include="lib\jasmine\jasmine.js" />
-    <Content Include="lib\jquery-1.7.2.js" />
     <Content Include="lib\require.js" />
     <Content Include="lib\text.js" />
-    <Content Include="lib\underscore.js" />
     <TypeScriptCompile Include="modules\Backbone.d.ts" />
     <TypeScriptCompile Include="modules\Jasmine-jquery.d.ts" />
     <TypeScriptCompile Include="modules\Jasmine.d.ts" />
     <TypeScriptCompile Include="modules\require.d.ts" />
-    <TypeScriptCompile Include="modules\jquery.d.ts" />
     <TypeScriptCompile Include="modules\Handlebars.d.ts" />
-    <Content Include="modules\underscore.d.ts" />
     <Content Include="SampleApp.html" />
+    <Content Include="packages.config" />
+    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.3.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="SpecRunner_AMD.html" />
     <Content Include="SpecRunner_Common.html" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\underscore\underscore.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.md" />
@@ -44,6 +48,8 @@
   <ItemGroup>
     <Content Include="SpecRunner_SampleApp.html" />
     <Content Include="web.config" />
+    <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Scripts\underscore.min.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

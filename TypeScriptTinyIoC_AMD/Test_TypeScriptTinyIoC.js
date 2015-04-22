@@ -2,7 +2,7 @@
 /// <reference path="../modules/Jasmine-jquery.d.ts" />
 /// <reference path="../modules/require.d.ts" />
 /// <reference path="../modules/Backbone.d.ts" />
-/// <reference path="../modules/jquery.d.ts" />
+/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="../modules/Handlebars.d.ts" />
 /// <reference path="../TypeScriptTinyIoC/TypeScriptTinyIoC.ts" />
 var _this = this;
@@ -14,7 +14,6 @@ var IDrawableInterface = (function () {
     }
     return IDrawableInterface;
 })();
-
 var IUnknownInterface = (function () {
     function IUnknownInterface() {
         this.className = "IUnknownInterface";
@@ -23,7 +22,6 @@ var IUnknownInterface = (function () {
     }
     return IUnknownInterface;
 })();
-
 var TestImplementsIDrawable = (function () {
     function TestImplementsIDrawable() {
     }
@@ -36,7 +34,6 @@ var TestImplementsIDrawable = (function () {
     };
     return TestImplementsIDrawable;
 })();
-
 var TestDoesNotImplementIDrawable = (function () {
     function TestDoesNotImplementIDrawable() {
     }
@@ -46,7 +43,6 @@ var TestDoesNotImplementIDrawable = (function () {
     };
     return TestDoesNotImplementIDrawable;
 })();
-
 var TestImplementsIDynamicMap = (function () {
     function TestImplementsIDynamicMap() {
     }
@@ -58,7 +54,6 @@ var TestImplementsIDynamicMap = (function () {
     };
     return TestImplementsIDynamicMap;
 })();
-
 var TestDoesNotImplementIDynamicMap = (function () {
     function TestDoesNotImplementIDynamicMap() {
     }
@@ -68,7 +63,6 @@ var TestDoesNotImplementIDynamicMap = (function () {
     };
     return TestDoesNotImplementIDynamicMap;
 })();
-
 var IDriveable = (function () {
     function IDriveable() {
         this.className = 'IDriveable';
@@ -77,7 +71,6 @@ var IDriveable = (function () {
     }
     return IDriveable;
 })();
-
 var Car = (function () {
     function Car() {
     }
@@ -98,7 +91,6 @@ var Car = (function () {
     };
     return Car;
 })();
-
 describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoc.ts", function () {
     beforeEach(function () {
         _this.typeScriptTinyIoC = new TypeScriptTinyIOC();
@@ -111,25 +103,21 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoc.ts", function () {
             TypeScriptTinyIOC.register(new TestDoesNotImplementIDrawable(), new IDrawableInterface());
         }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IDrawableInterface interface. Method draw was not found"));
     });
-
     it("test resolve class of interface returns valid object", function () {
         var testImplementsIDrawable = new TestImplementsIDrawable();
         TypeScriptTinyIOC.register(testImplementsIDrawable, new IDrawableInterface());
         var implementsIDrawable = TypeScriptTinyIOC.resolve(new IDrawableInterface());
         expect(implementsIDrawable.draw()).toEqual("drawn");
     });
-
     it("test resolve class with no implementation throws", function () {
         var testImplementsIDrawable = new TestImplementsIDrawable();
         expect(function () {
             TypeScriptTinyIOC.resolve(new IUnknownInterface());
         }).not.toThrow(new Error("Cannot find registered class that implements interface: IUnknownInterface"));
     });
-
     it("test interface checker does not throw with valid object", function () {
         var IDynamicMap = new InterfaceChecker(new IDriveable());
         var IDynamicMap_Strings = new InterfaceChecker({ className: 'test', methodNames: ['test'], propertyNames: [] });
-
         var myCar = new Car();
         InterfaceChecker.ensureImplements(myCar, IDynamicMap);
         expect(InterfaceChecker.implementsInterface(myCar, IDynamicMap)).toBeTruthy();

@@ -6,7 +6,6 @@ var IITodoEventClicked = (function () {
     }
     return IITodoEventClicked;
 })();
-
 var IITodoEventHandler = (function () {
     function IITodoEventHandler() {
         this.className = 'IITodoEventHandler';
@@ -14,7 +13,6 @@ var IITodoEventHandler = (function () {
     }
     return IITodoEventHandler;
 })();
-
 var IISecondEventClicked = (function () {
     function IISecondEventClicked() {
         this.className = 'IISecondEvent';
@@ -22,7 +20,6 @@ var IISecondEventClicked = (function () {
     }
     return IISecondEventClicked;
 })();
-
 var IISecondEventHandler = (function () {
     function IISecondEventHandler() {
         this.className = 'IISecondEventHandler';

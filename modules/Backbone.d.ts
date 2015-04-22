@@ -5,8 +5,6 @@
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
 
-/// <reference path="./jquery.d.ts" />
-
 declare module Backbone {
 
     interface AddOptions extends Silenceable {

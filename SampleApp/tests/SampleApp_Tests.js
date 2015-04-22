@@ -1,7 +1,7 @@
 /// <reference path="../../modules/Jasmine.d.ts" />
 /// <reference path="../../modules/Jasmine-jquery.d.ts" />
 /// <reference path="../../modules/Backbone.d.ts" />
-/// <reference path="../../modules/jquery.d.ts" />
+/// <reference path="../../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="../../TypeScriptTinyIoC/TypeScriptTinyIoC.ts" />
 /// <reference path="../../SampleApp/models/ListItem.ts" />
 /// <reference path="../../SampleApp/models/ListItemCollection.ts" />
@@ -12,11 +12,8 @@
 describe('SampleApp_Tests', function () {
     it('should handle handle_ListItemCollection_LoadedEvent', function () {
         var sampleApp = new SampleApp();
-
         var handleLoadedEventSpy = spyOn(sampleApp, 'handle_ListItemCollection_LoadedEvent');
-
         sampleApp.run();
-
         expect(handleLoadedEventSpy).toHaveBeenCalled();
     });
 });

@@ -3,8 +3,8 @@
 
 require.config({
     paths: {
-        'jquery': '../lib/jquery-1.7.2',
-        'underscore': '../lib/underscore',
+        'jquery': '../scripts/jquery-2.1.3',
+        'underscore': '../scripts/underscore',
         'backbone': '../lib/backbone',
         'handlebars': '../lib/handlebars-1.0.rc.1',
         'text': '../lib/text',
