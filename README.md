@@ -3,6 +3,8 @@ typescript-tiny-ioc
 
 A Tiny Inversion of Control container for TypeScript / JavaScript.  
 
+This is the github repository for the techniques found in Chapter 8 of the book ["Mastering TypeScript", PAKT Publishing](https://www.packtpub.com/web-development/mastering-typescript)
+
 Introduction
 ---
 Inversion of Control is a powerful programming technique in which object coupling is bound at runtime.  
@@ -18,6 +20,7 @@ Features
 
 - Service Location via Interfaces.  
 - Strongly-typed Domain events.
+- Updated to use generics.
 
 Register and use a Service
 -----
@@ -58,13 +61,13 @@ Construct a class that implements the IInterfaceChecker interface as found in Ty
 Construct an instance of your service, and register it with TypeScriptTinyIoC: (see SampleApp/SampleApp.ts)
 
     var configSettingService: ConfigSettingsService = new ConfigSettingsService();
-    TypeScriptTinyIOC.register(configSettingService, new IIConfigSettingsService());
+    TypeScriptTinyIOC.register(configSettingService, IIConfigSettingsService);
 
 **Resolve the Service**
 
 Use the TypeScriptTinyIoC container to resolve your service anywhere in your code as follows: ( see SampleApp/views/ListItemView.ts )
 
-    var configService : ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+    var configService : ConfigSettingsService = TypeScriptTinyIOC.resolve(IIConfigSettingsService);
     var snippet = configService.readSetting('ListItemView_Snippet');
 
 
@@ -116,7 +119,7 @@ In order to use Domain Events in TypeScript, follow the following steps:
 ( see SampleApp/views/ListItemView.ts)
 
     var listItemEvent = new ListItem_Clicked(<ListItem> this.model);
-    TypeScriptTinyIOC.raiseEvent(listItemEvent, new IIListItem_Clicked());
+    TypeScriptTinyIOC.raiseEvent(listItemEvent, IIListItem_Clicked);
 
 **Define an event Handler interface**  
 ( see SampleApp/events/ListItemEvents.ts)
@@ -144,7 +147,7 @@ In order to use Domain Events in TypeScript, follow the following steps:
 
 **Register the handler**  
 
-    TypeScriptTinyIOC.registerHandler(this, new IIListItem_Clicked_Handler(), new IIListItem_Clicked());
+    TypeScriptTinyIOC.registerHandler(this, IIListItem_Clicked_Handler, IIListItem_Clicked);
 
 Jasmine Unit Tests
 ---
