@@ -16,3 +16,4 @@ var ListItemCollection = (function (_super) {
     };
     return ListItemCollection;
 })(Backbone.Collection);
+//# sourceMappingURL=ListItemCollection.js.map

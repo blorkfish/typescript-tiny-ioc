@@ -54,9 +54,9 @@ define(["require", "exports", './Test_TypeScriptTinyIoC_AMD_Classes'], function 
         it("test register and raise works correctly ", function () {
             var event = new TodoEventClicked("test");
             var eventHandler = new TodoEventHandler();
-            TypeScriptTinyIOC.register(eventHandler, new IITodoEventHandler());
-            TypeScriptTinyIOC.registerHandler(eventHandler, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.register(eventHandler, IITodoEventHandler);
+            TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
             expect(eventHandler.wasClicked).toBeTruthy();
             expect(eventHandler.value).toEqual("test");
         });
@@ -64,9 +64,9 @@ define(["require", "exports", './Test_TypeScriptTinyIoC_AMD_Classes'], function 
             var event = new TodoEventClicked("test");
             var eventHandler_1 = new TodoEventHandler();
             var eventHandler_2 = new TodoEventHandler();
-            TypeScriptTinyIOC.registerHandler(eventHandler_1, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.registerHandler(eventHandler_2, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler_1, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.registerHandler(eventHandler_2, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
             expect(eventHandler_1.wasClicked).toBeTruthy();
             expect(eventHandler_1.value).toEqual("test");
             expect(eventHandler_2.wasClicked).toBeTruthy();
@@ -76,9 +76,9 @@ define(["require", "exports", './Test_TypeScriptTinyIoC_AMD_Classes'], function 
             var event = new TodoEventClicked("test");
             var incorrectEvent = 'undefined';
             var eventHandler = new TodoEventHandler();
-            TypeScriptTinyIOC.registerHandler(eventHandler, new IITodoEventHandler(), new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
             expect(function () {
-                TypeScriptTinyIOC.raiseEvent(incorrectEvent, new IITodoEventClicked());
+                TypeScriptTinyIoC.raiseEvent(incorrectEvent, IITodoEventClicked);
             }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventClicked interface. Property TodoId was not found"));
         });
         it("test registerHandler with class that does not implement interface throws ", function () {
@@ -86,15 +86,15 @@ define(["require", "exports", './Test_TypeScriptTinyIoC_AMD_Classes'], function 
             var incorrectEvent = 'undefined';
             var eventHandler = new TodoEventHandler_Throws();
             expect(function () {
-                TypeScriptTinyIOC.registerHandler(eventHandler, new IITodoEventHandler(), new IITodoEventClicked());
+                TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
             }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventHandler interface. Method handleEvent was not found"));
         });
         it("test registerHandler with AMD class gets event correctly ", function () {
             var event = new TodoEventClicked("test");
             var incorrectEvent = 'undefined';
             var eventHandler = new amdClasses.Test_TypeScriptTinyIoC_AMD_TodoEventHandler();
-            TypeScriptTinyIOC.registerHandler(eventHandler, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
             expect(eventHandler.wasClicked).toBeTruthy();
             expect(eventHandler.value).toEqual("test");
         });
@@ -103,61 +103,62 @@ define(["require", "exports", './Test_TypeScriptTinyIoC_AMD_Classes'], function 
             var incorrectEvent = 'undefined';
             var eventHandler = new amdClasses.Test_TypeScriptTinyIoC_AMD_NoEventHandler();
             expect(function () {
-                TypeScriptTinyIOC.registerHandler(eventHandler, new IITodoEventHandler(), new IITodoEventClicked());
+                TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
             }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventHandler interface. Method handleEvent was not found"));
         });
         it("test one class with two registerHandler events gets called correctly ", function () {
             var event = new TodoEventClicked("test");
             var incorrectEvent = 'undefined';
             var multipleHandler = new MultipleEventHandler();
-            TypeScriptTinyIOC.registerHandler(multipleHandler, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.registerHandler(multipleHandler, new IISecondEventHandler(), new IISecondEventClicked());
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(multipleHandler, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.registerHandler(multipleHandler, IISecondEventHandler, IISecondEventClicked);
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
             expect(multipleHandler.wasClicked_ITodo).toBeTruthy();
             expect(multipleHandler.value_ITodo).toEqual("test");
-            TypeScriptTinyIOC.raiseEvent(new SecondEventClicked("secondId"), new IISecondEventClicked());
+            TypeScriptTinyIoC.raiseEvent(new SecondEventClicked("secondId"), IISecondEventClicked);
             expect(multipleHandler.wasClicked_ISecond).toBeTruthy();
             expect(multipleHandler.value_ISecond).toEqual("secondId");
         });
         it("test unregisterHandler method does unregister the registered handlers ", function () {
-            TypeScriptTinyIOC.eventHandlers = [];
+            TypeScriptTinyIoC.events = [];
             var event = new TodoEventClicked("test");
             var eventHandler_1 = new TodoEventHandler();
-            TypeScriptTinyIOC.registerHandler(eventHandler_1, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler_1, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
             expect(eventHandler_1.wasClicked).toBeTruthy();
             expect(eventHandler_1.value).toEqual("test");
-            TypeScriptTinyIOC.unregisterHandler(eventHandler_1, new IITodoEventClicked());
+            TypeScriptTinyIoC.unregisterHandler(eventHandler_1, IITodoEventClicked);
             eventHandler_1.wasClicked = false;
             eventHandler_1.value = undefined;
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
             expect(eventHandler_1.wasClicked).not.toBeTruthy();
             expect(eventHandler_1.value).not.toBeDefined();
-            expect(Object.keys(TypeScriptTinyIOC.eventHandlers).length).toBe(0);
+            expect(Object.keys(TypeScriptTinyIoC.events).length).toBe(0);
         });
         it("test unregisterHandler method should not remove eventHandler if it has multiple handlers attached and one of them is unregisterd", function () {
-            TypeScriptTinyIOC.eventHandlers = [];
+            TypeScriptTinyIoC.events = [];
             var event = new TodoEventClicked("test");
             var eventHandler_1 = new TodoEventHandler();
             var eventHandler_2 = new TodoEventHandler();
-            TypeScriptTinyIOC.registerHandler(eventHandler_1, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.registerHandler(eventHandler_2, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler_1, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.registerHandler(eventHandler_2, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
             expect(eventHandler_1.wasClicked).toBeTruthy();
             expect(eventHandler_1.value).toEqual("test");
             expect(eventHandler_2.wasClicked).toBeTruthy();
             expect(eventHandler_2.value).toEqual("test");
-            TypeScriptTinyIOC.unregisterHandler(eventHandler_1, new IITodoEventClicked());
+            TypeScriptTinyIoC.unregisterHandler(eventHandler_1, IITodoEventClicked);
             eventHandler_1.wasClicked = false;
             eventHandler_1.value = undefined;
             eventHandler_2.wasClicked = false;
             eventHandler_2.value = undefined;
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
             expect(eventHandler_1.wasClicked).not.toBeTruthy();
             expect(eventHandler_1.value).not.toBeDefined();
             expect(eventHandler_2.wasClicked).toBeTruthy();
             expect(eventHandler_2.value).toEqual("test");
-            expect(Object.keys(TypeScriptTinyIOC.eventHandlers).length).not.toBe(0);
+            expect(Object.keys(TypeScriptTinyIoC.events).length).not.toBe(0);
         });
     });
 });
+//# sourceMappingURL=Test_TypeScriptTinyIoC_Events.js.map

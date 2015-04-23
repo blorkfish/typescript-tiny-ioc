@@ -6,21 +6,21 @@
 /// <reference path="../modules/Handlebars.d.ts" />
 /// <reference path="../TypeScriptTinyIoC/TypeScriptTinyIoC.ts" />
 var _this = this;
-var IDrawableInterface = (function () {
-    function IDrawableInterface() {
-        this.className = 'IDrawableInterface';
+var IIDrawable = (function () {
+    function IIDrawable() {
+        this.className = 'IIDrawable';
         this.methodNames = ['centerOnPoint', 'zoom', 'draw'];
         this.propertyNames = [];
     }
-    return IDrawableInterface;
+    return IIDrawable;
 })();
-var IUnknownInterface = (function () {
-    function IUnknownInterface() {
-        this.className = "IUnknownInterface";
+var IIUnknown = (function () {
+    function IIUnknown() {
+        this.className = "IIUnknown";
         this.methodNames = ['unknown'];
         this.propertyNames = [];
     }
-    return IUnknownInterface;
+    return IIUnknown;
 })();
 var TestImplementsIDrawable = (function () {
     function TestImplementsIDrawable() {
@@ -93,41 +93,40 @@ var Car = (function () {
 })();
 describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoc.ts", function () {
     beforeEach(function () {
-        _this.typeScriptTinyIoC = new TypeScriptTinyIOC();
+        _this.typeScriptTinyIoC = new TypeScriptTinyIoC();
     });
     it("test register class of interface does not throw", function () {
-        TypeScriptTinyIOC.register(new TestImplementsIDrawable(), new IDrawableInterface());
+        TypeScriptTinyIoC.register(new TestImplementsIDrawable(), IIDrawable);
     });
     it("test register throws with invalid object", function () {
         expect(function () {
-            TypeScriptTinyIOC.register(new TestDoesNotImplementIDrawable(), new IDrawableInterface());
-        }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IDrawableInterface interface. Method draw was not found"));
+            TypeScriptTinyIoC.register(new TestDoesNotImplementIDrawable(), IIDrawable);
+        }).toThrow(new Error("TypeScriptTinyIoC cannot register instance of IIDrawable"));
     });
     it("test resolve class of interface returns valid object", function () {
         var testImplementsIDrawable = new TestImplementsIDrawable();
-        TypeScriptTinyIOC.register(testImplementsIDrawable, new IDrawableInterface());
-        var implementsIDrawable = TypeScriptTinyIOC.resolve(new IDrawableInterface());
+        TypeScriptTinyIoC.register(testImplementsIDrawable, IIDrawable);
+        var implementsIDrawable = TypeScriptTinyIoC.resolve(IIDrawable);
         expect(implementsIDrawable.draw()).toEqual("drawn");
     });
     it("test resolve class with no implementation throws", function () {
         var testImplementsIDrawable = new TestImplementsIDrawable();
         expect(function () {
-            TypeScriptTinyIOC.resolve(new IUnknownInterface());
+            TypeScriptTinyIoC.resolve(IIUnknown);
         }).not.toThrow(new Error("Cannot find registered class that implements interface: IUnknownInterface"));
     });
-    it("test interface checker does not throw with valid object", function () {
-        var IDynamicMap = new InterfaceChecker(new IDriveable());
-        var IDynamicMap_Strings = new InterfaceChecker({ className: 'test', methodNames: ['test'], propertyNames: [] });
-        var myCar = new Car();
-        InterfaceChecker.ensureImplements(myCar, IDynamicMap);
-        expect(InterfaceChecker.implementsInterface(myCar, IDynamicMap)).toBeTruthy();
-    });
-    it("test interface throws with invalid object", function () {
-        var testObject = new TestDoesNotImplementIDynamicMap();
-        var IDynamicMap = new InterfaceChecker({ className: "IDynamicMap", methodNames: ['centerOnPoint', 'zoom', 'draw'], propertyNames: [] });
-        expect(InterfaceChecker.implementsInterface(testObject, IDynamicMap)).not.toBeTruthy();
-        expect(function () {
-            InterfaceChecker.ensureImplements(testObject, IDynamicMap);
-        }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IDynamicMap interface. Method draw was not found"));
-    });
+    //it("test interface checker does not throw with valid object", () => {
+    //    var IDynamicMap = new InterfaceChecker<IDriveable>();
+    //    var IDynamicMap_Strings = new InterfaceChecker<IDriveable>(/*{ className: 'test', methodNames: ['test'], propertyNames: []}*/);
+    //    var myCar = new Car();
+    //    IDynamicMap.implementsInterface(myCar, IIDynamicMap);
+    //    expect(IDynamicMap_Strings.implementsInterface(myCar, IDynamicMap)).toBeTruthy();
+    //});
+    //it("test interface throws with invalid object", () => {
+    //    var testObject = new TestDoesNotImplementIDynamicMap();
+    //    var IDynamicMap = new InterfaceChecker<IDriveable>({ className: "IDynamicMap", methodNames: ['centerOnPoint', 'zoom', 'draw'], propertyNames: [] });
+    //    expect(InterfaceChecker.implementsInterface(testObject, IDynamicMap)).not.toBeTruthy();
+    //    expect(() => { InterfaceChecker.ensureImplements(testObject, IDynamicMap) } ).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IDynamicMap interface. Method draw was not found"));
+    //});
 });
+//# sourceMappingURL=Test_TypeScriptTinyIoC.js.map

@@ -1,47 +1,25 @@
 var InterfaceChecker = (function () {
-    function InterfaceChecker(object) {
-        this.name = object.className;
-        this.methods = [];
-        this.properties = [];
-        var i, len;
-        if (object.methodNames) {
-            for (i = 0, len = object.methodNames.length; i < len; i++) {
-                this.methods.push(object.methodNames[i]);
-            }
-            ;
-        }
-        ;
-        if (object.propertyNames) {
-            for (i = 0, len = object.propertyNames.length; i < len; i++) {
-                this.properties.push(object.propertyNames[i]);
-            }
-            ;
-        }
-        ;
+    function InterfaceChecker() {
     }
-    InterfaceChecker.ensureImplements = function (object, targetInterface) {
+    InterfaceChecker.prototype.implementsInterface = function (classToCheck, t) {
+        var targetInterface = new t();
         var i, len;
-        for (i = 0, len = targetInterface.methods.length; i < len; i++) {
-            var method = targetInterface.methods[i];
-            if (!object[method] || typeof object[method] !== 'function') {
-                throw new Error("Function InterfaceChecker.ensureImplements: object does not implement the " + targetInterface.name + " interface. Method " + method + " was not found");
+        if (targetInterface.methodNames) {
+            for (i = 0, len = targetInterface.methodNames.length; i < len; i++) {
+                var method = targetInterface.methodNames[i];
+                if (!classToCheck[method] || typeof classToCheck[method] !== 'function') {
+                    console.log("Function :" + method + " not found");
+                    return false;
+                }
             }
         }
-        ;
-        for (i = 0, len = targetInterface.properties.length; i < len; i++) {
-            var property = targetInterface.properties[i];
-            if (!object[property] || typeof object[property] == 'function') {
-                throw new Error("Function InterfaceChecker.ensureImplements: object does not implement the " + targetInterface.name + " interface. Property " + property + " was not found");
-            }
-        }
-        ;
-    };
-    InterfaceChecker.implementsInterface = function (object, targetInterface) {
-        var i, len;
-        for (i = 0, len = targetInterface.methods.length; i < len; i++) {
-            var method = targetInterface.methods[i];
-            if (!object[method] || typeof object[method] !== 'function') {
-                return false;
+        if (targetInterface.propertyNames) {
+            for (i = 0, len = targetInterface.propertyNames.length; i < len; i++) {
+                var property = targetInterface.propertyNames[i];
+                if (!classToCheck[property] || typeof classToCheck[property] == 'function') {
+                    console.log("Property :" + property + " not found");
+                    return false;
+                }
             }
         }
         return true;
@@ -49,20 +27,24 @@ var InterfaceChecker = (function () {
     return InterfaceChecker;
 })();
 var EventHandlerList = (function () {
-    function EventHandlerList(handleEventMethod) {
-        this.eventHandlers = [];
-        this.handleEventMethod = handleEventMethod;
+    function EventHandlerList(handleEventMethodName) {
+        this.eventHandlers = new Array();
+        this.handleEventMethod = handleEventMethodName;
     }
     EventHandlerList.prototype.registerHandler = function (handler, interfaceType) {
-        var interfaceToImplement = new InterfaceChecker(interfaceType);
-        InterfaceChecker.ensureImplements(handler, interfaceToImplement); // will throw if not implemented
-        this.eventHandlers.push(handler);
+        var interfaceChecker = new InterfaceChecker();
+        if (interfaceChecker.implementsInterface(handler, interfaceType)) {
+            this.eventHandlers.push(handler);
+        }
+        else {
+            var interfaceExpected = new interfaceType();
+            throw new Error("EventHandlerList cannot register handler of " + interfaceExpected.className);
+        }
     };
     EventHandlerList.prototype.raiseEvent = function (event) {
         var i, len = 0;
         for (i = 0, len = this.eventHandlers.length; i < len; i++) {
             var handler = this.eventHandlers[i];
-            //try {
             handler[this.handleEventMethod](event);
         }
     };
@@ -74,60 +56,69 @@ var EventHandlerList = (function () {
     };
     return EventHandlerList;
 })();
-var TypeScriptTinyIOC = (function () {
-    function TypeScriptTinyIOC() {
+var TypeScriptTinyIoC = (function () {
+    function TypeScriptTinyIoC() {
     }
-    TypeScriptTinyIOC.register = function (targetObject, interfaceType) {
-        var interfaceToImplement = new InterfaceChecker(interfaceType);
-        InterfaceChecker.ensureImplements(targetObject, interfaceToImplement); // will throw if not implemented
-        if (InterfaceChecker.implementsInterface(targetObject, interfaceToImplement)) {
-            this.registeredClasses[interfaceType.className] = targetObject;
+    TypeScriptTinyIoC.register = function (targetObject, targetInterface) {
+        var interfaceChecker = new InterfaceChecker();
+        var targetClassName = new targetInterface();
+        if (interfaceChecker.implementsInterface(targetObject, targetInterface)) {
+            this.registeredClasses[targetClassName.className] = targetObject;
+        }
+        else {
+            throw new Error("TypeScriptTinyIoC cannot register instance of " + targetClassName.className);
         }
     };
-    TypeScriptTinyIOC.unregister = function (targetObject, interfaceType) {
-        var resolvedInterface = this.registeredClasses[interfaceType.className];
-        if (resolvedInterface) {
-            delete this.registeredClasses[interfaceType.className];
+    TypeScriptTinyIoC.resolve = function (targetInterface) {
+        var targetClassName = new targetInterface();
+        if (this.registeredClasses[targetClassName.className]) {
+            return this.registeredClasses[targetClassName.className];
+        }
+        else {
+            throw new Error("TypeScriptTinyIoC cannot find instance of " + targetClassName.className);
         }
     };
-    TypeScriptTinyIOC.registerHandler = function (handler, handlerInterface, eventInterface) {
-        var handlerList = this.eventHandlers[eventInterface.className];
+    TypeScriptTinyIoC.unregister = function (targetInterface) {
+        var targetClassName = new targetInterface();
+        if (this.registeredClasses[targetClassName.className]) {
+            delete this.registeredClasses[targetClassName.className];
+        }
+    };
+    TypeScriptTinyIoC.registerHandler = function (handler, handlerInterface, eventInterface) {
+        var eventInterfaceInstance = new eventInterface();
+        var handlerInterfaceInstance = new handlerInterface();
+        var handlerList = this.events[eventInterfaceInstance.className];
         if (handlerList) {
             handlerList.registerHandler(handler, handlerInterface);
         }
         else {
-            handlerList = new EventHandlerList(handlerInterface.methodNames[0]);
+            handlerList = new EventHandlerList(handlerInterfaceInstance.methodNames[0]);
             handlerList.registerHandler(handler, handlerInterface);
-            this.eventHandlers[eventInterface.className] = handlerList;
+            this.events[eventInterfaceInstance.className] = handlerList;
         }
     };
-    TypeScriptTinyIOC.unregisterHandler = function (handler, eventInterface) {
-        var handlerList = this.eventHandlers[eventInterface.className];
-        if (handlerList) {
-            handlerList.unregisterHandler(handler);
-            if (handlerList.eventHandlers.length <= 0) {
-                delete this.eventHandlers[eventInterface.className];
+    TypeScriptTinyIoC.raiseEvent = function (event, eventInterface) {
+        var eventChecker = new InterfaceChecker();
+        if (eventChecker.implementsInterface(event, eventInterface)) {
+            var eventInterfaceInstance = new eventInterface();
+            var handlerList = this.events[eventInterfaceInstance.className];
+            if (handlerList) {
+                handlerList.raiseEvent(event);
             }
         }
     };
-    TypeScriptTinyIOC.raiseEvent = function (event, eventInterface) {
-        var eventChecker = new InterfaceChecker(eventInterface);
-        InterfaceChecker.ensureImplements(event, eventChecker);
-        var handlerList = this.eventHandlers[eventInterface.className];
+    TypeScriptTinyIoC.unregisterHandler = function (handler, eventInterface) {
+        var eventInterfaceInstance = new eventInterface;
+        var handlerList = this.events[eventInterfaceInstance.className];
         if (handlerList) {
-            handlerList.raiseEvent(event);
+            handlerList.unregisterHandler(handler);
+            if (handlerList.eventHandlers.length <= 0) {
+                delete this.events[eventInterfaceInstance.className];
+            }
         }
     };
-    TypeScriptTinyIOC.resolve = function (interfaceType) {
-        var resolvedInterface = this.registeredClasses[interfaceType.className];
-        return resolvedInterface;
-    };
-    TypeScriptTinyIOC.clearAll = function () {
-        //this.registeredClasses = [];
-        this.eventHandlers = [];
-    };
-    TypeScriptTinyIOC.registeredClasses = [];
-    TypeScriptTinyIOC.eventHandlers = [];
-    return TypeScriptTinyIOC;
+    TypeScriptTinyIoC.registeredClasses = new Array();
+    TypeScriptTinyIoC.events = new Array();
+    return TypeScriptTinyIoC;
 })();
-;
+//# sourceMappingURL=TypeScriptTinyIoC.js.map

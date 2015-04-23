@@ -37,3 +37,4 @@ var ListItem = (function (_super) {
     });
     return ListItem;
 })(Backbone.Model);
+//# sourceMappingURL=ListItem.js.map

@@ -16,7 +16,7 @@ class ListItemCollectionView extends Backbone.View {
 
     render(): Backbone.View {
 
-        var configService: ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configService: ConfigSettingsService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         var snippet = configService.readSetting('ListItemCollectionView_Snippet');
 
         $(this.el).html(snippet);

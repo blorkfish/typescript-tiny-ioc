@@ -12,7 +12,7 @@ describe("TypeScriptTinyIoC_AMD : Test_ConfigSettingsService", () => {
     beforeEach(() => {
         configSettingsService = new ConfigSettingsService();
         configSettingsService.storeSetting("test_setting", "test_value");
-        TypeScriptTinyIOC.register(configSettingsService, new IIConfigSettingsService());
+        TypeScriptTinyIoC.register(configSettingsService, IIConfigSettingsService);
 
     });
 
@@ -22,7 +22,7 @@ describe("TypeScriptTinyIoC_AMD : Test_ConfigSettingsService", () => {
 
     it("should be able to read a config setting from TypeScriptTinyIoC", () => {
 
-        var configFromIoc = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configFromIoc = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         expect(configFromIoc).not.toBeNull();
 
         expect(configFromIoc.readSetting("test_setting")).toEqual("test_value");
@@ -30,10 +30,10 @@ describe("TypeScriptTinyIoC_AMD : Test_ConfigSettingsService", () => {
 
     it("should be able to read a second config setting from TypeScriptTinyIoC", () => {
 
-        var configFromIoc: ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configFromIoc: ConfigSettingsService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         configFromIoc.storeSetting("second_setting", "second_setting_value");
         
-        var secondCallToIoc: ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var secondCallToIoc: ConfigSettingsService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
 
         expect(secondCallToIoc.readSetting("second_setting")).toEqual("second_setting_value");
 

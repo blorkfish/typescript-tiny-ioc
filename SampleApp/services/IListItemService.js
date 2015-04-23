@@ -6,3 +6,4 @@ var IIMockListItemService = (function () {
     }
     return IIMockListItemService;
 })();
+//# sourceMappingURL=IListItemService.js.map

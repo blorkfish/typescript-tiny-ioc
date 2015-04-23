@@ -25,10 +25,10 @@ describe('ListItemCollectionView_Tests', function () {
         $.ajax({ url: "/SampleApp/views/ListItemCollectionView.html", async: false, success: function (data) {
             htmlSnippet = data;
         } });
-        var configSettingService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configSettingService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         if (!configSettingService) {
             configSettingService = new ConfigSettingsService();
-            TypeScriptTinyIOC.register(configSettingService, new IIConfigSettingsService());
+            TypeScriptTinyIoC.register(configSettingService, IIConfigSettingsService);
         }
         configSettingService.storeSetting('ListItemCollectionView_Snippet', htmlSnippet);
         //// setup mock handler
@@ -38,7 +38,7 @@ describe('ListItemCollectionView_Tests', function () {
     afterEach(function () {
     });
     it('config service should have stored ListItemCollectionView.html as snippet', function () {
-        var configSettingService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configSettingService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         expect(configSettingService).toBeDefined();
         expect(configSettingService.readSetting('ListItemCollectionView_Snippet')).toContain("<div id=\"list-item-collection-view\">");
     });
@@ -55,3 +55,4 @@ describe('ListItemCollectionView_Tests', function () {
         expect(innerHtml).toContain("<div id=\"list-item-view-5\">Id : 5 Name : testName</div>");
     });
 });
+//# sourceMappingURL=ListItemCollectionView_Tests.js.map

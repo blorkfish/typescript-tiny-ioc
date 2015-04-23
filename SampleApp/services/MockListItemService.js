@@ -18,7 +18,8 @@ var MockListItemService = (function () {
         var listItemCollection = new ListItemCollection();
         listItemCollection.loadCollectionFromArray(listItemArr);
         var event = new ListItemCollection_LoadedEvent(listItemCollection);
-        TypeScriptTinyIOC.raiseEvent(event, new IIListItemCollection_LoadedEvent());
+        TypeScriptTinyIoC.raiseEvent(event, IIListItemCollection_LoadedEvent);
     };
     return MockListItemService;
 })();
+//# sourceMappingURL=MockListItemService.js.map

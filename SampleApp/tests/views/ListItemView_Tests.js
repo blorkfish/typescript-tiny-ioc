@@ -31,11 +31,8 @@ describe('ListItemView_Tests', function () {
         $.ajax({ url: "/SampleApp/views/ListItemView.html", async: false, success: function (data) {
             htmlSnippet = data;
         } });
-        var configSettingService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
-        if (!configSettingService) {
-            configSettingService = new ConfigSettingsService();
-            TypeScriptTinyIOC.register(configSettingService, new IIConfigSettingsService());
-        }
+        var configSettingService = new ConfigSettingsService();
+        TypeScriptTinyIoC.register(configSettingService, IIConfigSettingsService);
         configSettingService.storeSetting('ListItemView_Snippet', htmlSnippet);
         // setup mock handler
         //mockHandler = new MockListItemEventHandler_Views();
@@ -44,7 +41,7 @@ describe('ListItemView_Tests', function () {
     afterEach(function () {
     });
     it('config service should have stored ListItemView.html as snippet', function () {
-        var configSettingService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configSettingService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         expect(configSettingService).toBeDefined();
         expect(configSettingService.readSetting('ListItemView_Snippet')).toEqual("<div id=\"list-item-view-{{Id}}\">Id : {{Id}} Name : {{Name}}</div>");
     });
@@ -60,10 +57,11 @@ describe('ListItemView_Tests', function () {
         var listItemView = new ListItemView({ model: new ListItem({ Id: 5, Name: 'testName' }) });
         listItemView.render();
         var mock_Handler = new MockListItem_Clicked_Handler();
-        TypeScriptTinyIOC.registerHandler(mock_Handler, new IIListItem_Clicked_Handler(), new IIListItem_Clicked());
+        TypeScriptTinyIoC.registerHandler(mock_Handler, IIListItem_Clicked_Handler, IIListItem_Clicked);
         var handlerSpy = spyOn(mock_Handler, 'handleListItem_Clicked_Event');
         var listItem = $(listItemView.el).find('#list-item-view-5');
         listItem.trigger('click');
         expect(handlerSpy).toHaveBeenCalled();
     });
 });
+//# sourceMappingURL=ListItemView_Tests.js.map

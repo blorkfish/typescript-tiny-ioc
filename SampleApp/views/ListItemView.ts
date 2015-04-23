@@ -16,7 +16,7 @@ class ListItemView extends Backbone.View {
 
     render(): Backbone.View {
         
-        var configService : ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configService: ConfigSettingsService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         var snippet = configService.readSetting('ListItemView_Snippet');
 
         var template = Handlebars.compile(snippet);
@@ -28,6 +28,6 @@ class ListItemView extends Backbone.View {
 
     onClicked() {
         var listItemEvent = new ListItem_Clicked(<ListItem> this.model);
-        TypeScriptTinyIOC.raiseEvent(listItemEvent, new IIListItem_Clicked());
+        TypeScriptTinyIoC.raiseEvent(listItemEvent, IIListItem_Clicked);
     }
 }

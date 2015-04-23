@@ -27,3 +27,4 @@ var IISecondEventHandler = (function () {
     }
     return IISecondEventHandler;
 })();
+//# sourceMappingURL=Test_TypeScriptTinyIoC_ClassDefinitions.js.map

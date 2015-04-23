@@ -20,10 +20,10 @@ describe("SampleApp : tests : services : ListItemService_Tests ", function () {
     var mockListLitemHandler;
     beforeEach(function () {
         mockListLitemHandler = new MockListItemEventHandler();
-        TypeScriptTinyIOC.registerHandler(mockListLitemHandler, new IIListItemCollection_LoadedEvent_Handler(), new IIListItemCollection_LoadedEvent());
+        TypeScriptTinyIoC.registerHandler(mockListLitemHandler, IIListItemCollection_LoadedEvent_Handler, IIListItemCollection_LoadedEvent);
     });
     afterEach(function () {
-        TypeScriptTinyIOC.unregisterHandler(mockListLitemHandler, new IIListItemCollection_LoadedEvent());
+        TypeScriptTinyIoC.unregisterHandler(mockListLitemHandler, IIListItemCollection_LoadedEvent);
     });
     it("MockListItemService should raise ListItemCollection_LoadedEvent", function () {
         var mockService = new MockListItemService();
@@ -33,3 +33,4 @@ describe("SampleApp : tests : services : ListItemService_Tests ", function () {
         expect(eventHandler_Spy).toHaveBeenCalled();
     });
 });
+//# sourceMappingURL=ListItemService_Tests.js.map

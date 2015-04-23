@@ -1,0 +1,1 @@
+{"version":3,"file":"IListItemService.js","sourceRoot":"","sources":["IListItemService.ts"],"names":["IIMockListItemService","IIMockListItemService.constructor"],"mappings":"AAAA,qEAAqE;AAMrE,IAAM,qBAAqB;IAA3BA,SAAMA,qBAAqBA;QACvBC,cAASA,GAAWA,uBAAuBA,CAACA;QAC5CA,gBAAWA,GAAaA,CAACA,eAAeA,CAACA,CAACA;IAC9CA,CAACA;IAADD,4BAACA;AAADA,CAACA,AAHD,IAGC"}

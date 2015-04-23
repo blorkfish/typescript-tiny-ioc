@@ -69,11 +69,11 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
             var event = new TodoEventClicked("test");
 
             var eventHandler = new TodoEventHandler();
-            TypeScriptTinyIOC.register(eventHandler, new IITodoEventHandler());
+            TypeScriptTinyIoC.register(eventHandler, IITodoEventHandler);
 
-            TypeScriptTinyIOC.registerHandler(eventHandler, new IITodoEventHandler(), new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
 
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
 
             expect(eventHandler.wasClicked).toBeTruthy();
             expect(eventHandler.value).toEqual("test");
@@ -87,10 +87,10 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
             var eventHandler_1 = new TodoEventHandler();
             var eventHandler_2 = new TodoEventHandler();
 
-            TypeScriptTinyIOC.registerHandler(eventHandler_1, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.registerHandler(eventHandler_2, new IITodoEventHandler(), new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler_1, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.registerHandler(eventHandler_2, IITodoEventHandler, IITodoEventClicked);
 
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
 
             expect(eventHandler_1.wasClicked).toBeTruthy();
             expect(eventHandler_1.value).toEqual("test");
@@ -107,10 +107,10 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
 
             var eventHandler = new TodoEventHandler();
 
-            TypeScriptTinyIOC.registerHandler(eventHandler, new IITodoEventHandler(), new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
 
             expect(() => {
-                TypeScriptTinyIOC.raiseEvent(incorrectEvent, new IITodoEventClicked());
+                TypeScriptTinyIoC.raiseEvent(incorrectEvent, IITodoEventClicked);
             }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventClicked interface. Property TodoId was not found"));
 
         });
@@ -123,7 +123,7 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
             var eventHandler = new TodoEventHandler_Throws();
 
             expect(() => {
-                TypeScriptTinyIOC.registerHandler(eventHandler, new IITodoEventHandler(), new IITodoEventClicked());
+                TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
             }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventHandler interface. Method handleEvent was not found"));
 
         });
@@ -135,9 +135,9 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
 
             var eventHandler = new amdClasses.Test_TypeScriptTinyIoC_AMD_TodoEventHandler();
 
-            TypeScriptTinyIOC.registerHandler(eventHandler, new IITodoEventHandler(), new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
 
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
 
             expect(eventHandler.wasClicked).toBeTruthy();
             expect(eventHandler.value).toEqual("test");
@@ -152,7 +152,7 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
             var eventHandler = new amdClasses.Test_TypeScriptTinyIoC_AMD_NoEventHandler();
 
             expect(() => {
-                TypeScriptTinyIOC.registerHandler(eventHandler, new IITodoEventHandler(), new IITodoEventClicked());
+                TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
             }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventHandler interface. Method handleEvent was not found"));
 
         });
@@ -163,15 +163,15 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
             var incorrectEvent = 'undefined';
 
             var multipleHandler = new MultipleEventHandler();
-            TypeScriptTinyIOC.registerHandler(multipleHandler, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.registerHandler(multipleHandler, new IISecondEventHandler(), new IISecondEventClicked());
+            TypeScriptTinyIoC.registerHandler(multipleHandler, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.registerHandler(multipleHandler, IISecondEventHandler, IISecondEventClicked);
 
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
 
             expect(multipleHandler.wasClicked_ITodo).toBeTruthy();
             expect(multipleHandler.value_ITodo).toEqual("test");
 
-            TypeScriptTinyIOC.raiseEvent(new SecondEventClicked("secondId"), new IISecondEventClicked());
+            TypeScriptTinyIoC.raiseEvent(new SecondEventClicked("secondId"), IISecondEventClicked);
 
             expect(multipleHandler.wasClicked_ISecond).toBeTruthy();
             expect(multipleHandler.value_ISecond).toEqual("secondId");
@@ -180,44 +180,44 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
 
         it("test unregisterHandler method does unregister the registered handlers ", () => {
             
-            TypeScriptTinyIOC.eventHandlers = [];
+            TypeScriptTinyIoC.events = [];
 
             var event = new TodoEventClicked("test");
 
             var eventHandler_1 = new TodoEventHandler();
 
-            TypeScriptTinyIOC.registerHandler(eventHandler_1, new IITodoEventHandler(), new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler_1, IITodoEventHandler, IITodoEventClicked);
 
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
 
             expect(eventHandler_1.wasClicked).toBeTruthy();
             expect(eventHandler_1.value).toEqual("test");
 
-            TypeScriptTinyIOC.unregisterHandler(eventHandler_1, new IITodoEventClicked());
+            TypeScriptTinyIoC.unregisterHandler(eventHandler_1, IITodoEventClicked);
             eventHandler_1.wasClicked = false;
             eventHandler_1.value = undefined;
 
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
 
             expect(eventHandler_1.wasClicked).not.toBeTruthy();
             expect(eventHandler_1.value).not.toBeDefined();
             
-            expect(Object.keys(TypeScriptTinyIOC.eventHandlers).length).toBe(0);
+            expect(Object.keys(TypeScriptTinyIoC.events).length).toBe(0);
         });
 
         it("test unregisterHandler method should not remove eventHandler if it has multiple handlers attached and one of them is unregisterd", () => {
 
-            TypeScriptTinyIOC.eventHandlers = [];
+            TypeScriptTinyIoC.events = [];
 
             var event = new TodoEventClicked("test");
 
             var eventHandler_1 = new TodoEventHandler();
             var eventHandler_2 = new TodoEventHandler();
 
-            TypeScriptTinyIOC.registerHandler(eventHandler_1, new IITodoEventHandler(), new IITodoEventClicked());
-            TypeScriptTinyIOC.registerHandler(eventHandler_2, new IITodoEventHandler(), new IITodoEventClicked());
+            TypeScriptTinyIoC.registerHandler(eventHandler_1, IITodoEventHandler, IITodoEventClicked);
+            TypeScriptTinyIoC.registerHandler(eventHandler_2, IITodoEventHandler, IITodoEventClicked);
 
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
 
             expect(eventHandler_1.wasClicked).toBeTruthy();
             expect(eventHandler_1.value).toEqual("test");
@@ -225,13 +225,13 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
             expect(eventHandler_2.wasClicked).toBeTruthy();
             expect(eventHandler_2.value).toEqual("test");
 
-            TypeScriptTinyIOC.unregisterHandler(eventHandler_1, new IITodoEventClicked());
+            TypeScriptTinyIoC.unregisterHandler(eventHandler_1, IITodoEventClicked);
             eventHandler_1.wasClicked = false;
             eventHandler_1.value = undefined;
             eventHandler_2.wasClicked = false;
             eventHandler_2.value = undefined;
 
-            TypeScriptTinyIOC.raiseEvent(event, new IITodoEventClicked());
+            TypeScriptTinyIoC.raiseEvent(event, IITodoEventClicked);
 
             expect(eventHandler_1.wasClicked).not.toBeTruthy();
             expect(eventHandler_1.value).not.toBeDefined();
@@ -240,7 +240,7 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
             expect(eventHandler_2.value).toEqual("test");
 
 
-            expect(Object.keys(TypeScriptTinyIOC.eventHandlers).length).not.toBe(0);
+            expect(Object.keys(TypeScriptTinyIoC.events).length).not.toBe(0);
         });
 
     });

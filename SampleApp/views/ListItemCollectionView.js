@@ -20,7 +20,7 @@ var ListItemCollectionView = (function (_super) {
         _.bindAll(this, 'addListItem');
     };
     ListItemCollectionView.prototype.render = function () {
-        var configService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         var snippet = configService.readSetting('ListItemCollectionView_Snippet');
         $(this.el).html(snippet);
         if (this.collection != undefined) {
@@ -35,3 +35,4 @@ var ListItemCollectionView = (function (_super) {
     };
     return ListItemCollectionView;
 })(Backbone.View);
+//# sourceMappingURL=ListItemCollectionView.js.map

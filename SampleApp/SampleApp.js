@@ -15,7 +15,7 @@ var SampleApp = (function () {
     SampleApp.prototype.run = function () {
         var htmlSnippet = null;
         var configSettingService = new ConfigSettingsService();
-        TypeScriptTinyIOC.register(configSettingService, new IIConfigSettingsService());
+        TypeScriptTinyIoC.register(configSettingService, IIConfigSettingsService);
         $.ajax({ url: "/SampleApp/views/ListItemView.html", async: false, success: function (data) {
             htmlSnippet = data;
         } });
@@ -24,8 +24,8 @@ var SampleApp = (function () {
             htmlSnippet = data;
         } });
         configSettingService.storeSetting('ListItemCollectionView_Snippet', htmlSnippet);
-        TypeScriptTinyIOC.registerHandler(this, new IIListItemCollection_LoadedEvent_Handler(), new IIListItemCollection_LoadedEvent());
-        TypeScriptTinyIOC.registerHandler(this, new IIListItem_Clicked_Handler(), new IIListItem_Clicked());
+        TypeScriptTinyIoC.registerHandler(this, IIListItemCollection_LoadedEvent_Handler, IIListItemCollection_LoadedEvent);
+        TypeScriptTinyIoC.registerHandler(this, IIListItem_Clicked_Handler, IIListItem_Clicked);
         var mockListItemService = new MockListItemService();
         mockListItemService.loadListItems();
     };
@@ -39,3 +39,4 @@ var SampleApp = (function () {
     };
     return SampleApp;
 })();
+//# sourceMappingURL=SampleApp.js.map

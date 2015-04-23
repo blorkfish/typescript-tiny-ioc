@@ -23,15 +23,15 @@ describe("SampleApp : tests : services : ListItemService_Tests ", () => {
 
     beforeEach(() => {
         mockListLitemHandler = new MockListItemEventHandler();
-        TypeScriptTinyIOC.registerHandler(
+        TypeScriptTinyIoC.registerHandler(
             mockListLitemHandler,
-            new IIListItemCollection_LoadedEvent_Handler(),
-            new IIListItemCollection_LoadedEvent());
+            IIListItemCollection_LoadedEvent_Handler,
+            IIListItemCollection_LoadedEvent);
 
     });
 
     afterEach(() => {
-        TypeScriptTinyIOC.unregisterHandler(mockListLitemHandler, new IIListItemCollection_LoadedEvent());
+        TypeScriptTinyIoC.unregisterHandler(mockListLitemHandler, IIListItemCollection_LoadedEvent);
     });
     
 

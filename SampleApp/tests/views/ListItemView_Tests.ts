@@ -35,12 +35,9 @@ describe('ListItemView_Tests', () => {
         var htmlSnippet = null;
         $.ajax({ url: "/SampleApp/views/ListItemView.html", async: false, success: function (data) { htmlSnippet = data; } });
 
-        var configSettingService : ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
-        if (!configSettingService) {
-            configSettingService = new ConfigSettingsService();
-            TypeScriptTinyIOC.register(configSettingService, new IIConfigSettingsService());
-        }
-
+        var configSettingService = new ConfigSettingsService();
+        TypeScriptTinyIoC.register(configSettingService, IIConfigSettingsService);
+        
         configSettingService.storeSetting('ListItemView_Snippet', htmlSnippet);
 
         // setup mock handler
@@ -56,7 +53,7 @@ describe('ListItemView_Tests', () => {
 
     it('config service should have stored ListItemView.html as snippet', () => {
 
-        var configSettingService: ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configSettingService: ConfigSettingsService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         expect(configSettingService).toBeDefined();
 
         expect(configSettingService.readSetting('ListItemView_Snippet')).toEqual("<div id=\"list-item-view-{{Id}}\">Id : {{Id}} Name : {{Name}}</div>");
@@ -82,7 +79,7 @@ describe('ListItemView_Tests', () => {
 
         var mock_Handler = new MockListItem_Clicked_Handler();
 
-        TypeScriptTinyIOC.registerHandler(mock_Handler, new IIListItem_Clicked_Handler(), new IIListItem_Clicked());
+        TypeScriptTinyIoC.registerHandler(mock_Handler, IIListItem_Clicked_Handler, IIListItem_Clicked);
 
         var handlerSpy = spyOn(mock_Handler, 'handleListItem_Clicked_Event');
 

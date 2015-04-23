@@ -26,10 +26,10 @@ describe('ListItemCollectionView_Tests', () => {
         var htmlSnippet = null;
         $.ajax({ url: "/SampleApp/views/ListItemCollectionView.html", async: false, success: function (data) { htmlSnippet = data; } });
 
-        var configSettingService: ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configSettingService: ConfigSettingsService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         if (!configSettingService) {
             configSettingService = new ConfigSettingsService();
-            TypeScriptTinyIOC.register(configSettingService, new IIConfigSettingsService());
+            TypeScriptTinyIoC.register(configSettingService, IIConfigSettingsService);
         }
 
         configSettingService.storeSetting('ListItemCollectionView_Snippet', htmlSnippet);
@@ -47,7 +47,7 @@ describe('ListItemCollectionView_Tests', () => {
 
     it('config service should have stored ListItemCollectionView.html as snippet', () => {
 
-        var configSettingService: ConfigSettingsService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configSettingService: ConfigSettingsService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         expect(configSettingService).toBeDefined();
 
         expect(configSettingService.readSetting('ListItemCollectionView_Snippet')).toContain("<div id=\"list-item-collection-view\">");

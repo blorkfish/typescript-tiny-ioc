@@ -18,7 +18,7 @@ var ListItemView = (function (_super) {
         _super.call(this, options);
     }
     ListItemView.prototype.render = function () {
-        var configService = TypeScriptTinyIOC.resolve(new IIConfigSettingsService());
+        var configService = TypeScriptTinyIoC.resolve(IIConfigSettingsService);
         var snippet = configService.readSetting('ListItemView_Snippet');
         var template = Handlebars.compile(snippet);
         var html = template(this.model.toJSON());
@@ -27,7 +27,8 @@ var ListItemView = (function (_super) {
     };
     ListItemView.prototype.onClicked = function () {
         var listItemEvent = new ListItem_Clicked(this.model);
-        TypeScriptTinyIOC.raiseEvent(listItemEvent, new IIListItem_Clicked());
+        TypeScriptTinyIoC.raiseEvent(listItemEvent, IIListItem_Clicked);
     };
     return ListItemView;
 })(Backbone.View);
+//# sourceMappingURL=ListItemView.js.map

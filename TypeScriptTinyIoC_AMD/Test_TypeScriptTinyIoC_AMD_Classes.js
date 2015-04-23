@@ -17,3 +17,4 @@ define(["require", "exports"], function (require, exports) {
     })();
     exports.Test_TypeScriptTinyIoC_AMD_NoEventHandler = Test_TypeScriptTinyIoC_AMD_NoEventHandler;
 });
+//# sourceMappingURL=Test_TypeScriptTinyIoC_AMD_Classes.js.map

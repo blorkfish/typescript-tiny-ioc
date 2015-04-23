@@ -51,3 +51,4 @@ require(['jquery', 'backbone', 'tinyioc', 'console', 'configsettingsservice', 'T
         jasmine.getEnv().execute();
     });
 });
+//# sourceMappingURL=TypeScriptTinyIoC_AMD_RequireConfig.js.map

@@ -20,22 +20,18 @@
       <DependentUpon>Test_TypeScriptTinyIoC.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Test_TypeScriptTinyIoC.ts" />
-
     <Content Include="Test_TypeScriptTinyIoC_AMD_Classes.js">
       <DependentUpon>Test_TypeScriptTinyIoC_AMD_Classes.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Test_TypeScriptTinyIoC_AMD_Classes.ts" />
-
     <Content Include="Test_TypeScriptTinyIoC_ClassDefinitions.js">
       <DependentUpon>Test_TypeScriptTinyIoC_ClassDefinitions.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Test_TypeScriptTinyIoC_ClassDefinitions.ts" />
-
     <Content Include="Test_TypeScriptTinyIoC_Events.js">
       <DependentUpon>Test_TypeScriptTinyIoC_Events.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Test_TypeScriptTinyIoC_Events.ts" />
-
     <TypeScriptCompile Include="Test_ConfigSettingsService.ts" />
     <Content Include="Test_ConfigSettingsService.js">
       <DependentUpon>Test_ConfigSettingsService.ts</DependentUpon>
@@ -75,13 +71,13 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptIncludeComments>true</TypeScriptIncludeComments>
-    <TypeScriptSourceMap>false</TypeScriptSourceMap>
-    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>amd</TypeScriptModuleKind>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptIncludeComments>false</TypeScriptIncludeComments>
-    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
