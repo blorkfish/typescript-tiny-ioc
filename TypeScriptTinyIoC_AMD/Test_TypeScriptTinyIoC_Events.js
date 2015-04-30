@@ -79,7 +79,7 @@ define(["require", "exports", './Test_TypeScriptTinyIoC_AMD_Classes'], function 
             TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
             expect(function () {
                 TypeScriptTinyIoC.raiseEvent(incorrectEvent, IITodoEventClicked);
-            }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventClicked interface. Property TodoId was not found"));
+            }).toThrow(new Error("TypeScriptTinyIoC cannot raiseEvent IITodoEventClicked"));
         });
         it("test registerHandler with class that does not implement interface throws ", function () {
             var event = new TodoEventClicked("test");
@@ -87,7 +87,7 @@ define(["require", "exports", './Test_TypeScriptTinyIoC_AMD_Classes'], function 
             var eventHandler = new TodoEventHandler_Throws();
             expect(function () {
                 TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
-            }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventHandler interface. Method handleEvent was not found"));
+            }).toThrow(new Error("EventHandlerList cannot register handler of IITodoEventHandler"));
         });
         it("test registerHandler with AMD class gets event correctly ", function () {
             var event = new TodoEventClicked("test");
@@ -104,7 +104,7 @@ define(["require", "exports", './Test_TypeScriptTinyIoC_AMD_Classes'], function 
             var eventHandler = new amdClasses.Test_TypeScriptTinyIoC_AMD_NoEventHandler();
             expect(function () {
                 TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
-            }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventHandler interface. Method handleEvent was not found"));
+            }).toThrow(new Error("EventHandlerList cannot register handler of IITodoEventHandler"));
         });
         it("test one class with two registerHandler events gets called correctly ", function () {
             var event = new TodoEventClicked("test");

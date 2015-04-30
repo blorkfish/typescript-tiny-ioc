@@ -111,7 +111,7 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
 
             expect(() => {
                 TypeScriptTinyIoC.raiseEvent(incorrectEvent, IITodoEventClicked);
-            }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventClicked interface. Property TodoId was not found"));
+            }).toThrow(new Error("TypeScriptTinyIoC cannot raiseEvent IITodoEventClicked"));
 
         });
 
@@ -124,7 +124,7 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
 
             expect(() => {
                 TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
-            }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventHandler interface. Method handleEvent was not found"));
+            }).toThrow(new Error("EventHandlerList cannot register handler of IITodoEventHandler"));
 
         });
 
@@ -153,7 +153,7 @@ describe("TypeScriptTinyIoC_AMD : Test_TypeScriptTinyIoC_Events.ts", () => {
 
             expect(() => {
                 TypeScriptTinyIoC.registerHandler(eventHandler, IITodoEventHandler, IITodoEventClicked);
-            }).toThrow(new Error("Function InterfaceChecker.ensureImplements: object does not implement the IITodoEventHandler interface. Method handleEvent was not found"));
+            }).toThrow(new Error("EventHandlerList cannot register handler of IITodoEventHandler"));
 
         });
 

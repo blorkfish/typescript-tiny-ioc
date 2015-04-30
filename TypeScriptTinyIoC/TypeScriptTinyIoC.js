@@ -99,12 +99,15 @@ var TypeScriptTinyIoC = (function () {
     };
     TypeScriptTinyIoC.raiseEvent = function (event, eventInterface) {
         var eventChecker = new InterfaceChecker();
+        var eventInterfaceInstance = new eventInterface();
         if (eventChecker.implementsInterface(event, eventInterface)) {
-            var eventInterfaceInstance = new eventInterface();
             var handlerList = this.events[eventInterfaceInstance.className];
             if (handlerList) {
                 handlerList.raiseEvent(event);
             }
+        }
+        else {
+            throw new Error("TypeScriptTinyIoC cannot raiseEvent " + eventInterfaceInstance.className);
         }
     };
     TypeScriptTinyIoC.unregisterHandler = function (handler, eventInterface) {

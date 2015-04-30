@@ -124,12 +124,16 @@ class TypeScriptTinyIoC {
         eventInterface: { new (): IInterfaceChecker }) {
 
         var eventChecker = new InterfaceChecker();
+		var eventInterfaceInstance = new eventInterface();
         if (eventChecker.implementsInterface(event, eventInterface)) {
-            var eventInterfaceInstance = new eventInterface();
+            
             var handlerList = this.events[eventInterfaceInstance.className];
             if (handlerList) {
                 handlerList.raiseEvent(event);
             }
+        } else {
+            throw new Error("TypeScriptTinyIoC cannot raiseEvent "
+                + eventInterfaceInstance.className);
         }
     }
 
